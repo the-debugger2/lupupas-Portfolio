@@ -247,7 +247,7 @@ a,
 }
 
 
-/*vision Section*/
+/* Vision Section */
 
 .vision-section {
     display: flex;
@@ -265,19 +265,16 @@ a,
     align-items: flex-start;
     justify-content: space-between;
     border-bottom: 2px solid white;
-    /* only for vision */
     padding: 3rem 0;
 }
 
 .mission-container {
     border-bottom: none;
-    /* no border for mission */
 }
 
 .vision-heading,
 .mission-heading {
     flex: 1;
-    /* left column */
     max-width: 30%;
     font-size: 2rem;
     border-right: 3px solid white;
@@ -287,7 +284,6 @@ a,
 .vision-text,
 .mission-text {
     flex: 2;
-    /* right column */
     max-width: 65%;
     font-size: 1.25rem;
     line-height: 1.6;
@@ -523,7 +519,6 @@ a,
 /* Highlights Section */
 
 .highlights-section {
-    /* Use only one height rule; subtract navbar if it's fixed */
     height: calc(100vh - var(--nav-height));
     background-color: var(--page-color2);
     display: flex;
@@ -531,13 +526,11 @@ a,
     padding: 1rem;
     box-sizing: border-box;
     overflow: hidden;
-    /* contain the grid within the viewport */
 }
 
 .highlights-heading {
     text-align: center;
     margin: 0 0 0.75rem;
-    /* reduce margin to avoid pushing content */
     font-size: 2.5rem;
     color: var(--page-color1);
 }
@@ -553,12 +546,9 @@ a,
     flex: 1;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    /* Image1 + 3 equal columns */
     grid-template-rows: 1fr 1fr;
-    /* two equal rows */
     gap: 10px;
     height: 100%;
-    /* fills remaining section height */
     align-items: stretch;
     justify-items: stretch;
     min-height: 0;
@@ -601,15 +591,12 @@ a,
 
 .image {
     display: block;
-    /* prevents baseline gaps that can look like clipping */
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* fills each cell cleanly */
     cursor: pointer;
     border-radius: 20px;
     min-height: 0;
-    /* allow image to fit its grid cell */
 }
 
 .image:hover {
@@ -760,7 +747,6 @@ a,
         max-width: 50%;
         font-size: 2rem;
     }
-    /* About Section - FIXED FOR LAPTOP */
     .about-section {
         padding: 4rem 2rem;
     }
@@ -817,7 +803,6 @@ a,
         max-width: 50%;
         font-size: 1.8rem;
     }
-    /* About Section for Tablet */
     .about-content {
         flex-direction: column;
         gap: 2rem;
@@ -924,28 +909,22 @@ a,
     .vision-container,
     .mission-container {
         flex-direction: column;
-        /* stack heading and text */
         align-items: flex-start;
-        /* align left */
     }
     .vision-heading,
     .mission-heading {
         max-width: 100%;
         border-right: none;
-        /* remove divider on small screens */
         padding-right: 0;
         margin-bottom: 1rem;
-        /* spacing between heading and text */
     }
     .vision-text,
     .mission-text {
         max-width: 100%;
         font-size: 1rem;
-        /* slightly smaller text for mobile */
     }
     .vision-section {
         padding: 2rem;
-        /* reduce padding on small screens */
     }
     .contact-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -976,95 +955,5 @@ a,
         gap: 0.1rem;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
     }
-    .nav-link {
-        padding: 8px 10px;
-        font-size: 0.75rem;
-    }
-    #logo {
-        width: 55px;
-        height: 55px;
-    }
-    .hero-section {
-        padding: 1rem;
-    }
-    .hero-text {
-        font-size: 1rem;
-    }
-    .about-container,
-    .contact-container {
-        padding: 1rem;
-    }
-    .about-heading,
-    .contact-title {
-        font-size: 1.75rem;
-        margin-bottom: 2rem;
-    }
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    .gallery-carousel-slide {
-        height: 250px;
-    }
-    .gallery-carousel-thumbnails {
-        gap: 0.25rem;
-    }
-    .gallery-carousel-thumbnail {
-        width: 50px;
-        height: 35px;
-    }
-    .image-container {
-        height: 250px;
-    }
-}
-
-
-/* Utility Classes */
-
-.text-center {
-    text-align: center;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.mb-1 {
-    margin-bottom: 1rem;
-}
-
-.mb-2 {
-    margin-bottom: 2rem;
-}
-
-.p-1 {
-    padding: 1rem;
-}
-
-.p-2 {
-    padding: 2rem;
-}
-
-.w-100 {
-    width: 100%;
-}
-
-.h-100 {
-    height: 100%;
-}
-
-
-/* Remove old conflicting styles */
-
-.navbar-section {
-    display: none;
-}
-
-
-/* Ensure smooth scrolling for react-scroll */
-
-.scroll-container {
-    scroll-behavior: smooth;
 }
