@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/lupupas-Portfolio/static/css/main.cb75e2dc.css",
+    "main.css": "/lupupas-Portfolio/static/css/main.93949c88.css",
     "main.js": "/lupupas-Portfolio/static/js/main.36fd86be.js",
     "static/js/919.9e58ee65.chunk.js": "/lupupas-Portfolio/static/js/919.9e58ee65.chunk.js",
     "static/media/project4.jpg": "/lupupas-Portfolio/static/media/project4.56705ca694606a71b3ac.jpg",
@@ -32,12 +32,12 @@
     "static/media/lobster-cyrillic-ext-400-normal.woff": "/lupupas-Portfolio/static/media/lobster-cyrillic-ext-400-normal.15ac3211bd1733c41447.woff",
     "static/media/lobster-vietnamese-400-normal.woff": "/lupupas-Portfolio/static/media/lobster-vietnamese-400-normal.fc3283b2b13e8af80162.woff",
     "index.html": "/lupupas-Portfolio/index.html",
-    "main.cb75e2dc.css.map": "/lupupas-Portfolio/static/css/main.cb75e2dc.css.map",
+    "main.93949c88.css.map": "/lupupas-Portfolio/static/css/main.93949c88.css.map",
     "main.36fd86be.js.map": "/lupupas-Portfolio/static/js/main.36fd86be.js.map",
     "919.9e58ee65.chunk.js.map": "/lupupas-Portfolio/static/js/919.9e58ee65.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb75e2dc.css",
+    "static/css/main.93949c88.css",
     "static/js/main.36fd86be.js"
   ]
 }
