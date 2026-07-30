@@ -5,9 +5,13 @@ import project6 from "../Assets/Images/Projects/project6.jpg";
 import project7 from "../Assets/Images/Projects/project7.jpg";
 import project8 from "../Assets/Images/Projects/project8.jpg";
 import project9 from "../Assets/Images/Projects/project9.jpg";
+import project10 from "../Assets/Images/Projects/project10.jpg";
+import project11 from "../Assets/Images/Projects/project11.jpg";
 import project12 from "../Assets/Images/Projects/project12.jpg";
+import project13 from "../Assets/Images/Projects/project13.jpg";
 import project14 from "../Assets/Images/Projects/project14.jpg";
-import project16 from "../Assets/Images/Projects/project16.jpg";
+import project15 from "../Assets/Images/Projects/project15.jpg";
+import project16 from "../Assets/Images/Projects/project23.jpg";
 import project18 from "../Assets/Images/Projects/project18.jpg";
 
 const Gallery = () => {
@@ -23,8 +27,12 @@ const Gallery = () => {
     { id: 7, src: project7, alt: "Project 7" },
     { id: 8, src: project8, alt: "Project 8" },
     { id: 9, src: project9, alt: "Project 9" },
+    { id: 10, src: project10, alt: "Project 10" },
+    { id: 11, src: project11, alt: "Project 11" },
     { id: 12, src: project12, alt: "Project 12" },
+    { id: 13, src: project13, alt: "Project 13" },
     { id: 14, src: project14, alt: "Project 14" },
+    { id: 15, src: project15, alt: "Project 15" },
     { id: 16, src: project16, alt: "Project 16" },
     { id: 18, src: project18, alt: "Project 18" }
   ];

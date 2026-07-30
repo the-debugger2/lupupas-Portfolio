@@ -52,6 +52,19 @@ export default function Navbar() {
                     </li>
                     <li className="nav-item">
                         <Link 
+                            to="video" 
+                            smooth={true} 
+                            duration={800} 
+                            offset={-80}
+                            spy={true}
+                            activeClass="active"
+                            className="nav-link"
+                        >
+                            Video
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link 
                             to="vision" 
                             smooth={true} 
                             duration={800} 
