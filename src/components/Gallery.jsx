@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import project4 from "../Assets/Images/Projects/project4.jpg";
 import project5 from "../Assets/Images/Projects/project5.jpg";
 import project6 from "../Assets/Images/Projects/project6.jpg";
@@ -14,40 +14,62 @@ import project15 from "../Assets/Images/Projects/project15.jpg";
 import project16 from "../Assets/Images/Projects/project23.jpg";
 import project18 from "../Assets/Images/Projects/project18.jpg";
 
+// Defined outside the component so it isn't rebuilt on every render
+const galleryImages = [
+  { id: 4, src: project4, alt: "Project 4" },
+  { id: 5, src: project5, alt: "Project 5" },
+  { id: 6, src: project6, alt: "Project 6" },
+  { id: 7, src: project7, alt: "Project 7" },
+  { id: 8, src: project8, alt: "Project 8" },
+  { id: 9, src: project9, alt: "Project 9" },
+  { id: 10, src: project10, alt: "Project 10" },
+  { id: 11, src: project11, alt: "Project 11" },
+  { id: 12, src: project12, alt: "Project 12" },
+  { id: 13, src: project13, alt: "Project 13" },
+  { id: 14, src: project14, alt: "Project 14" },
+  { id: 15, src: project15, alt: "Project 15" },
+  { id: 16, src: project16, alt: "Project 16" },
+  { id: 18, src: project18, alt: "Project 18" },
+];
+
 const Gallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const sectionRef = useRef(null);
 
-  // Replace these with your actual image imports
-  const galleryImages = [
-    { id: 4, src: project4, alt: "Project 4" },
-    { id: 5, src: project5, alt: "Project 5" },
-    { id: 6, src: project6, alt: "Project 6" },
-    { id: 7, src: project7, alt: "Project 7" },
-    { id: 8, src: project8, alt: "Project 8" },
-    { id: 9, src: project9, alt: "Project 9" },
-    { id: 10, src: project10, alt: "Project 10" },
-    { id: 11, src: project11, alt: "Project 11" },
-    { id: 12, src: project12, alt: "Project 12" },
-    { id: 13, src: project13, alt: "Project 13" },
-    { id: 14, src: project14, alt: "Project 14" },
-    { id: 15, src: project15, alt: "Project 15" },
-    { id: 16, src: project16, alt: "Project 16" },
-    { id: 18, src: project18, alt: "Project 18" }
-  ];
+  // Only run the carousel while the section is actually on screen
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldAutoplay = isVisible && !isPaused && !selectedImage;
 
   useEffect(() => {
-    if (isPaused) return;
+    if (!shouldAutoplay) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === galleryImages.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentIndex, isPaused, galleryImages.length]);
+  }, [currentIndex, shouldAutoplay]);
+
+  // Preload the next slide so the swap doesn't decode a big image mid-scroll
+  useEffect(() => {
+    if (!isVisible) return;
+    const next = galleryImages[(currentIndex + 1) % galleryImages.length];
+    const img = new Image();
+    img.src = next.src;
+  }, [currentIndex, isVisible]);
 
   const goToNext = () => {
     setCurrentIndex(currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1);
@@ -70,39 +92,43 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="gallery-section">
-      <h2 className="gallery-heading">Gallery</h2>  
-      <p className="gallery-description">Here is a showcase of some of the work I have done <br/><span className="white"> click on image to view</span></p>
-      
+    <section id="gallery" className="gallery-section" ref={sectionRef}>
+      <h2 className="gallery-heading">Gallery</h2>
+      <p className="gallery-description">
+        Here is a showcase of some of the work I have done <br />
+        <span className="white"> click on image to view</span>
+      </p>
+
       {/* Carousel Container */}
-      <div 
+      <div
         className="gallery-carousel"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         {/* Main Carousel Slide */}
         <div className="gallery-carousel-main">
-          <button 
-            className="gallery-carousel-btn gallery-carousel-btn-prev" 
+          <button
+            className="gallery-carousel-btn gallery-carousel-btn-prev"
             onClick={goToPrevious}
             aria-label="Previous image"
           >
             ‹
           </button>
-          
-          <div 
+
+          <div
             className="gallery-carousel-slide"
             onClick={() => openImageModal(galleryImages[currentIndex])}
           >
-            <img 
-              src={galleryImages[currentIndex].src} 
+            <img
+              src={galleryImages[currentIndex].src}
               alt={galleryImages[currentIndex].alt}
               className="gallery-carousel-image"
+              decoding="async"
             />
           </div>
-          
-          <button 
-            className="gallery-carousel-btn gallery-carousel-btn-next" 
+
+          <button
+            className="gallery-carousel-btn gallery-carousel-btn-next"
             onClick={goToNext}
             aria-label="Next image"
           >
@@ -115,7 +141,9 @@ const Gallery = () => {
           {galleryImages.map((_, index) => (
             <button
               key={index}
-              className={`gallery-carousel-indicator ${index === currentIndex ? 'gallery-carousel-indicator-active' : ''}`}
+              className={`gallery-carousel-indicator ${
+                index === currentIndex ? "gallery-carousel-indicator-active" : ""
+              }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -127,13 +155,17 @@ const Gallery = () => {
           {galleryImages.map((image, index) => (
             <div
               key={image.id}
-              className={`gallery-carousel-thumbnail ${index === currentIndex ? 'gallery-carousel-thumbnail-active' : ''}`}
+              className={`gallery-carousel-thumbnail ${
+                index === currentIndex ? "gallery-carousel-thumbnail-active" : ""
+              }`}
               onClick={() => goToSlide(index)}
             >
-              <img 
-                src={image.src} 
+              <img
+                src={image.src}
                 alt={image.alt}
                 className="gallery-carousel-thumbnail-img"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}
@@ -144,19 +176,19 @@ const Gallery = () => {
       {selectedImage && (
         <div className="gallery-modal-overlay" onClick={closeImageModal}>
           <div className="gallery-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button 
+            <button
               className="gallery-modal-close"
               onClick={closeImageModal}
               aria-label="Close image"
             >
               ×
             </button>
-            <img 
-              src={selectedImage.src} 
+            <img
+              src={selectedImage.src}
               alt={selectedImage.alt}
               className="gallery-modal-image"
+              decoding="async"
             />
-           
           </div>
         </div>
       )}
